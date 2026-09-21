@@ -20,6 +20,7 @@ type Cluster struct {
 
 	useServerDurations bool
 	useMutationTokens  bool
+	enableTCPNoDelay   bool
 
 	timeoutsConfig TimeoutsConfig
 
@@ -48,6 +49,10 @@ type Cluster struct {
 type IoConfig struct {
 	DisableMutationTokens  bool
 	DisableServerDurations bool
+
+	// EnableTCPNoDelay controls whether TCP_NODELAY is enabled on KV connections.
+	// It is disabled by default.
+	EnableTCPNoDelay bool
 }
 
 // TimeoutsConfig specifies options for various operation timeouts.
@@ -236,6 +241,7 @@ func clusterFromOptions(opts ClusterOptions) *Cluster {
 		},
 		transcoder:             opts.Transcoder,
 		useMutationTokens:      useMutationTokens,
+		enableTCPNoDelay:       opts.IoConfig.EnableTCPNoDelay,
 		retryStrategyWrapper:   newCoreRetryStrategyWrapper(opts.RetryStrategy),
 		orphanLoggerEnabled:    !opts.OrphanReporterConfig.Disabled,
 		orphanLoggerInterval:   opts.OrphanReporterConfig.ReportInterval,

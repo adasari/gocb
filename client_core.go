@@ -57,6 +57,7 @@ func (c *stdConnectionMgr) buildConfig(cluster *Cluster) error {
 				UseMutationTokens:          cluster.useMutationTokens,
 				UseOutOfOrderResponses:     true,
 				UseClusterMapNotifications: true,
+				EnableTCPNoDelay:           cluster.enableTCPNoDelay,
 			},
 			KVConfig: gocbcore.KVConfig{
 				ConnectTimeout:       cluster.timeoutsConfig.ConnectTimeout,

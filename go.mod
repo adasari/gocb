@@ -34,3 +34,5 @@ require (
 )
 
 go 1.19
+
+replace github.com/couchbase/gocbcore/v10 => github.com/adasari/gocbcore/v10 v10.5.4-0.20260921052352-7fda97525ad7
